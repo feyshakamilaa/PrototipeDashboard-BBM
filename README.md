@@ -8,6 +8,12 @@ Monitoring Operasional BBM merupakan prototipe dashboard interaktif yang dikemba
 
 Proyek ini menerapkan konsep **Data Analytics, Business Intelligence, dan Data Visualization** untuk menyajikan informasi penerimaan, penyaluran, persediaan, serta biaya logistik BBM secara terstruktur dan mudah dipahami.
 
+Live Dashboard
+
+Akses prototipe dashboard melalui tautan berikut:
+
+https://feyshakamilaa.github.io/PrototipeDashboard-BBM/
+
 ## Dashboard Features
 
 - **Overview** — Ringkasan indikator utama operasional BBM.

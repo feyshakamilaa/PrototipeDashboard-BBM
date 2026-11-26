@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Monitoring Operasional BBM — Jatimbalinus</title>
+<link rel="stylesheet" href="css/style.css">
+</head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+<symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></symbol>
+<symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+<symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.600-1.500-3-1.500-1.700 0-3 .8-3 2s1.300 1.600 3 2 3 .8 3 2-1.300 2-3 2c-1.400 0-2.500-.5-3-1.500M12 6v2M12 16v2"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+</defs></svg>
+
+<aside class="side" id="side">
+  <div class="brand"><span class="logo">B</span><div><b>BBM Monitor</b><small>Regional Jatimbalinus</small></div></div>
+  <nav class="nav">
+    <a href="#overview" data-p="overview"><svg><use href="#i-grid"/></svg>Overview</a>
+    <a href="#stok" data-p="stok"><svg><use href="#i-box"/></svg>Stok &amp; Penerimaan</a>
+    <a href="#penyaluran" data-p="penyaluran"><svg><use href="#i-truck"/></svg>Analisis Penyaluran</a>
+    <a href="#biaya" data-p="biaya"><svg><use href="#i-coin"/></svg>Susut &amp; Biaya</a>
+  </nav>
+  <p class="note">Prototipe Akademik — Menggunakan Data Simulasi.</p>
+</aside>
+<div class="scrim" id="scrim"></div>
+
+<div class="main">
+  <header class="top">
+    <div class="tl"><button class="burger" id="burger" aria-label="Buka menu"><svg><use href="#i-menu"/></svg></button>
+      <div><h1 id="ttl"></h1><p id="stl"></p></div></div>
+    <div class="filters">
+      <label>Tahun<select id="fy"></select></label>
+      <label>Bulan<select id="fm"></select></label>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="page" id="p-overview">
+      <div class="kpis" id="k-ov"></div>
+      <div class="card"><h3>Tren penerimaan dan penyaluran bulanan</h3><p>Volume per bulan, dalam ribu KL</p><div class="cb tall"><canvas id="c-ov"></canvas></div></div>
+    </section>
+
+    <section class="page" id="p-stok">
+      <div class="g g2">
+        <div class="card"><h3>Penerimaan vs penyaluran</h3><p>Volume per bulan, dalam ribu KL</p><div class="cb"><canvas id="c-terima"></canvas></div></div>
+        <div class="card"><h3>Stok akhir dan ketahanan stok</h3><p>Ketahanan stok (Coverage Days) = berapa hari stok cukup untuk penyaluran</p><div class="cb"><canvas id="c-stok"></canvas></div></div>
+      </div>
+      <div class="g g2">
+        <div class="card"><h3>Komposisi penerimaan menurut jenis BBM</h3><p>Porsi dari total penerimaan pada periode terpilih</p><div class="cb"><canvas id="c-komp"></canvas></div></div>
+        <div class="card"><h3>Status stok dan kuota BBM</h3><p>Jumlah bulan menurut status, dan pemakaian kuota</p><div id="st"></div><div class="tw" id="t-kuota"></div></div>
+      </div>
+    </section>
+
+    <section class="page" id="p-penyaluran">
+      <div class="g g2">
+        <div class="card"><h3>Penyaluran menurut produk</h3><p>Total volume periode terpilih, dalam ribu KL</p><div class="cb"><canvas id="c-prod"></canvas></div></div>
+        <div class="card"><h3>Penyaluran menurut provinsi</h3><p>Total volume periode terpilih, dalam ribu KL</p><div class="cb"><canvas id="c-prov"></canvas></div></div>
+      </div>
+      <div class="g g2">
+        <div class="card"><h3>Perbandingan penyaluran tahunan</h3><p>Realisasi dan target per tahun, dalam juta KL</p><div class="cb"><canvas id="c-thn"></canvas></div></div>
+        <div class="card"><h3>Target vs realisasi penyaluran</h3><p>Per bulan, dalam ribu KL</p><div class="cb"><canvas id="c-tgt"></canvas></div></div>
+      </div>
+      <div class="card"><h3>Ringkasan distribusi</h3><p>Volume dan pangsa penyaluran pada periode terpilih</p><div class="tw" id="t-dist"></div></div>
+    </section>
+
+    <section class="page" id="p-biaya">
+      <div class="kpis" id="k-bi"></div>
+      <div class="g g3">
+        <div class="card"><h3>Susut BBM menurut kategori</h3><p>Kategori R1, R3, dan R4 per bulan, dalam KL</p><div class="cb"><canvas id="c-susut"></canvas></div></div>
+        <div class="card"><h3>Komposisi susut</h3><p>Porsi R1, R3, dan R4</p><div class="cb"><canvas id="c-susutp"></canvas></div></div>
+      </div>
+      <div class="g g3">
+        <div class="card"><h3>Tren biaya logistik</h3><p>Handling, transportasi, dan pelabuhan per bulan, dalam miliar Rp</p><div class="cb"><canvas id="c-biaya"></canvas></div></div>
+        <div class="card"><h3>Komposisi biaya</h3><p>Porsi tiap komponen biaya</p><div class="cb"><canvas id="c-biayap"></canvas></div></div>
+      </div>
+      <div class="g g2">
+        <div class="card"><h3>Biaya distribusi per liter</h3><p>Total biaya logistik dibagi total penyaluran</p><div class="cb"><canvas id="c-bpl"></canvas></div></div>
+        <div class="card"><h3>Rincian biaya per tahun</h3><p>Total biaya dalam miliar Rp</p><div class="tw" id="t-biaya"></div></div>
+      </div>
+    </section>
+    <footer>Prototipe Akademik — Menggunakan Data Simulasi.</footer>
+  </main>
+</div>
+<script src="js/chart.umd.js"></script>
+<script src="data/data.js"></script>
+<script src="js/app.js"></script>
+</body></html>
